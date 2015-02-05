@@ -13,9 +13,10 @@
                 <input ng-model="weightField" type="number" size="50" placeholder="add a new weight">
                 <input type="submit" value="submit" class="btn btn-primary">
                 <span class="floatRight">Items in this list: {{itemsInList()}}</span>
-                <span class="floatRight">Heaviest pet: {{itemsInList()}}</span>
-            </form>
 
+            </form>
+            <span class="floatRight">Heaviest pet: {{itemsInList()}}</span>
+            <hr>
         </li>
         <li class="list-group-item" ng-repeat="test in data">Pet Name: {{test.text}},     Pet Weight: {{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>
     </ul>
