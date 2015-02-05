@@ -15,7 +15,7 @@
                 <span class="floatRight">Items in this list: {{itemsInList()}}</span>
 
             </form>
-            <span class="floatRight">Heaviest pet: {{itemsInList()}}</span>
+            <span class="floatRight">Heaviest pet: {{heaviestPet.text}}, Weight: {{heaviestPet.weight}}</span>
             <hr>
         </li>
         <li class="list-group-item" ng-repeat="test in data">Pet Name: {{test.text}},     Pet Weight: {{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>

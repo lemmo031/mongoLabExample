@@ -6,6 +6,7 @@ angular.module("appModule")
 
         $scope.textField = "";
         $scope.weightField = "";
+        $scope.heaviestPet = {text: "No Pet Found", weight: -1} //findHeaviestPet([]); // Initializes this field to have a default message.
 
         // Normally, data like this would be stored in a database, and this controller would issue an http:get request for it.
         $scope.data = [];
@@ -13,8 +14,9 @@ angular.module("appModule")
         $scope.getPets = function(){
             $http.get('api/pets').success(function(pets) {
                 $scope.data = pets;
+                $scope.heaviestPet = $scope.findHeaviestPet($scope.data);
             });
-           // $scope.findHeaviestPet;
+
         };
 
         $scope.getPets();
