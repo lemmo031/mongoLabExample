@@ -26,5 +26,15 @@ describe('Testing controller: mainCtrl', function(){
         expect(scope.findHeaviestPet(petArray)).toEqual({text: "Fido", weight: 35});
     });
 
+    it('should return the first pet tied for the heaviest weight from an array', function(){
+        var petArray = [{text: "Brutus", weight: 1}, {text: "Pit Bull", weight: 35}, {text: "Fluffy", weight: 20}, {text: "Fido", weight: 35}];
+        expect(scope.findHeaviestPet(petArray)).toEqual({text: "Pit Bull", weight: 35});
+    });
+
+    it('should return No Pets Found with a weight of -1 when passed an empty array', function(){
+        var petArray = [];
+        expect(scope.findHeaviestPet(petArray)).toEqual({text: "No Pets Found", weight: -1});
+    });
+
     // test for tied weights, just return the first found.
 });
