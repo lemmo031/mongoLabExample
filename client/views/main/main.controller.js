@@ -20,7 +20,7 @@ angular.module("appModule")
         $scope.getPets();
 
         $scope.addData = function(){
-            if($scope.textField.length >= 1 && $scope.weightField > 0) {
+            if($scope.textField.length >= 1 && $scope.isPositive($scope.weightField)) {
                 $http.post('api/pets', {text: $scope.textField, weight: $scope.weightField}).success(function(){
                     $scope.getPets();
                 });
@@ -54,5 +54,9 @@ angular.module("appModule")
             }
           return heaviest;
         };
+
+        $scope.isPositive = function(number){
+            return number > 0;
+        }
 
     });

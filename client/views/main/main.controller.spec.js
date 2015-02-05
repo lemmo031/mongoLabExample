@@ -36,5 +36,9 @@ describe('Testing controller: mainCtrl', function(){
         expect(scope.findHeaviestPet(petArray)).toEqual({text: "No Pets Found", weight: -1});
     });
 
-    // test for tied weights, just return the first found.
+    it('testing isPositive', function(){
+        expect(scope.isPositive(-1)).toEqual(false);
+        expect(scope.isPositive(0)).toEqual(false);
+        expect(scope.isPositive(1)).toEqual(true);
+    });
 });
