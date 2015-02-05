@@ -20,4 +20,10 @@ describe('Testing controller: mainCtrl', function(){
         expect(true).toEqual(true);
     });
 
+
+    it('should return the weight of the heaviest pet from an array', function(){
+        var petArray = [];
+        expect(scope.findHeaviestPet(petArray)).toEqual(35);
+    });
+
 });

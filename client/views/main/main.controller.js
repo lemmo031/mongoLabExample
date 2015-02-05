@@ -14,6 +14,7 @@ angular.module("appModule")
             $http.get('api/pets').success(function(pets) {
                 $scope.data = pets;
             });
+           // $scope.findHeaviestPet;
         };
 
         $scope.getPets();
@@ -39,7 +40,11 @@ angular.module("appModule")
         };
 
         $scope.itemsInList = function(){
-            return $scope.data.length;
+            return $scope.data[0].weight;
+        };
+
+        $scope.findHeaviestPet = function(arrayOfPets){
+          return 5;
         };
 
     });
