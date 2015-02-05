@@ -44,7 +44,15 @@ angular.module("appModule")
         };
 
         $scope.findHeaviestPet = function(arrayOfPets){
-          return 5;
+            //Handle case of empty array
+            var heaviest = {text: "No Pets Found", weight: -1}
+            for(var i = 0; i < arrayOfPets.length; i++){
+                var currentPet = arrayOfPets[i];
+                if (currentPet.weight > heaviest.weight) {
+                    heaviest = currentPet;
+                }
+            }
+          return heaviest;
         };
 
     });
