@@ -41,4 +41,10 @@ describe('Testing controller: mainCtrl', function(){
         expect(scope.isPositive(0)).toEqual(false);
         expect(scope.isPositive(1)).toEqual(true);
     });
+
+    it('testing isNotEmpty', function(){
+        expect(scope.isNotEmpty("Wow")).toEqual(true);
+        expect(scope.isNotEmpty("")).toEqual(false);
+        expect(scope.isNotEmpty("A")).toEqual(true);
+    });
 });
