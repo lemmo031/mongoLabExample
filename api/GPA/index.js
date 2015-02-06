@@ -5,7 +5,7 @@
 
 
 var express = require('express');
-var controller = require('./pets.controller.js');
+var controller = require('./GPA.controller.js');
 
 var router = express.Router();
 
