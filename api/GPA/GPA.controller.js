@@ -5,47 +5,48 @@ var mongoose = require('mongoose');
 // Defining Model
 // =====================================================
 
-var Pet = mongoose.model('Pet', {
-    text: String,
-    weight: Number
+var GPAModel = mongoose.model('GPAModel', {
+    class: String,
+    credits: Number,
+    grade: String
 });
 
 // Defining Routes
 // =====================================================
 
 exports.index = function(req, res) {
-    Pet.find(function (err, pets) {
+    GPAModel.find(function (err, gpa) {
         if (err) {
             console.log("Error getting data from database");
             res.send(err)
         } else {
-            res.json(pets); // return results
+            res.json(gpa); // return results
         }
     });
 };
 
 exports.create = function(req, res) {
-    Pet.create(req.body, function (err, pet) {
+    GPAModel.create(req.body, function (err, gpa) {
         if (err) {
             res.send(err);
         } else {
-            Pet.find(function (err, pets) {
+            GPAModel.find(function (err, gpas) {
                 if (err) {
                     res.send(err);
                 }
 
-                res.json(pets);
+                res.json(gpas);
             });
         }
     });
 };
 
 exports.destroy = function(req, res) {
-    Pet.findById(req.params.pet_id, function(err, pet){
+    GPAModel.findById(req.params.GPA_id, function(err, gpa){
       if(err) { res.send(err); return "error: " + err; }
-      if(!pet) { return res.sendStatus(404); }
+      if(!gpa) { return res.sendStatus(404); }
 
-      pet.remove(function(err){
+      gpa.remove(function(err){
          if(err) { return "error: " + err}
          return res.sendStatus(204);
       });

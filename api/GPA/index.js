@@ -1,6 +1,6 @@
 'use strict';
 
-// Defining the "pets" API module
+// Defining the "GPA" API module
 // =======================================
 
 
@@ -11,6 +11,6 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.post('/', controller.create);
-router.delete('/:pet_id', controller.destroy);
+router.delete('/:GPA_id', controller.destroy);
 
 module.exports = router;
