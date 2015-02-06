@@ -39,9 +39,9 @@ angular.module("appModule")
                 alert("Must Enter A Valid Class Grade");
                 return;
             }
-                $http.post('api/pets', {text: $scope.textField, weight: $scope.weightField}).success(function(){
-                    $scope.getPets();
-                });
+            $http.post('api/pets', {text: $scope.textField, weight: $scope.weightField}).success(function(){
+                $scope.getPets();
+            });
 
             $scope.classField = "";
             $scope.creditsField = "";
