@@ -1,0 +1,23 @@
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+
+
+<hr>
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item">
+
+            <form ng-submit="addData()">
+                <input ng-model="textField" type="text" size="50" placeholder="add a new item to the list!">
+                <input ng-model="weightField" type="number" size="50" placeholder="add a new weight">
+                <input type="submit" value="submit" class="btn btn-primary">
+                <span class="floatRight">Items in this list: {{itemsInList()}}</span>
+
+            </form>
+            <span class="floatRight">Heaviest pet: {{heaviestPet.text}}, Weight: {{heaviestPet.weight}}</span>
+            <hr>
+        </li>
+        <li class="list-group-item" ng-repeat="test in data">Pet Name: {{test.text}},     Pet Weight: {{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>
+    </ul>
+</div>
