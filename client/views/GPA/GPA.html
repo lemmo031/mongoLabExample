@@ -9,14 +9,13 @@
         <li class="list-group-item">
 
             <form ng-submit="addData()">
-                <input ng-model="textField" type="text" size="50" placeholder="add a new item to the list!">
-                <input ng-model="weightField" type="number" size="50" placeholder="add a new weight">
+                <input ng-model="classField" type="text" size="40" placeholder="add a new class to the list!">
+                <input ng-model="creditsField" type="number" size="30" placeholder="add number of credits">
+                <input ng-model="gradeField" type="text" size="15" placeholder="add letter grade">
                 <input type="submit" value="submit" class="btn btn-primary">
-                <span class="floatRight">Items in this list: {{itemsInList()}}</span>
+                <span class="floatRight">GPA: {{itemsInList()}}</span>
 
             </form>
-            <span class="floatRight">Heaviest pet: {{heaviestPet.text}}, Weight: {{heaviestPet.weight}}</span>
-            <hr>
         </li>
         <li class="list-group-item" ng-repeat="test in data">Pet Name: {{test.text}},     Pet Weight: {{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>
     </ul>
