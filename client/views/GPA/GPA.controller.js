@@ -83,5 +83,22 @@ angular.module("appModule")
             return text != "";
         }
 
+        $scope.isValidLetterGrade = function(text){
+            switch (text) {
+                case "A":
+                case "a":
+                case "B":
+                case "b":
+                case "C":
+                case "c":
+                case "D":
+                case "d":
+                case "F":
+                case "f":
+                    return true;
+                default:
+                    return false;
+            }
+        }
 
     });
