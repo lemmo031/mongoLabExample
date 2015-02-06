@@ -44,6 +44,7 @@ var options = {
 
 // API Routes
 app.use('/api/pets', require('./api/pets'));
+app.use('/api/GPA', require('./api/GPA'));
 
 // Non-API routes
 app.get('/*', function(req, res){

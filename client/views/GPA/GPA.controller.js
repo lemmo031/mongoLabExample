@@ -8,25 +8,26 @@ angular.module("appModule")
     .controller('GPACtrl', function($scope, $http){
         console.log("GPA controller loaded!");
 
-        $scope.classField = "";
-        $scope.creditsField = "";
-        $scope.gradeField = "";
-        //$scope.heaviestPet = {text: "No Pet Found", weight: -1} //findHeaviestPet([]); // Initializes this field to have a default message.
-        //
-        //// Normally, data like this would be stored in a database, and this controller would issue an http:get request for it.
-        //$scope.data = [];
-        //
-        //$scope.getPets = function(){
-        //    $http.get('api/pets').success(function(pets) {
-        //        $scope.data = pets;
-        //        $scope.heaviestPet = $scope.findHeaviestPet($scope.data);
-        //    });
-        //
-        //};
+        $scope.classField = "a";
+        $scope.creditsField = 3;
+        $scope.gradeField = "A";
+        $scope.heaviestPet = {text: "No Pet Found", weight: -1} //findHeaviestPet([]); // Initializes this field to have a default message.
 
-        //$scope.getPets();
+        //// Normally, data like this would be stored in a database, and this controller would issue an http:get request for it.
+        $scope.GPAdata = [];
+
+        $scope.updateDatabase = function(){
+            $http.get('api/GPA/').success(function(database) {
+                $scope.GPAdata = database;
+               // $scope.heaviestPet = $scope.findHeaviestPet($scope.data);
+            });
+
+        };
+
+        $scope.updateDatabase();
 
         $scope.addClass = function(){
+            console.log("Hi from addClass")
             if(!$scope.isNotEmpty($scope.classField)) {
                 alert("You Should Enter A Class Name!");
                 return;
@@ -39,8 +40,10 @@ angular.module("appModule")
                 alert("Must Enter A Valid Class Grade");
                 return;
             }
-            $http.post('api/pets', {text: $scope.textField, weight: $scope.weightField}).success(function(){
-                $scope.getPets();
+            console.log("Almost To POST")
+            $http.post('api/GPA/', {class: $scope.classField, credits: $scope.creditsField, grade: $scope.gradeField}).success(function(){
+                $scope.updateDatabase();
+                console.log("Ha, you can't see me!~")
             });
 
             $scope.classField = "";
@@ -49,32 +52,32 @@ angular.module("appModule")
 
         };
 
-        //$scope.removeData = function(index){
-        //    $http.delete('/api/pets/' + $scope.data[index]._id).success(function(){
-        //        $scope.getPets();
-        //    });
-        //};
-        //
-        //$scope.cat = function(str1, str2){
-        //    return str1 + str2;
-        //};
-        //
-        //$scope.itemsInList = function(){
-        //    return $scope.data.length;
-        //};
-        //
-        //$scope.findHeaviestPet = function(arrayOfPets){
-        //    //Handle case of empty array
-        //    var heaviest = {text: "No Pets Found", weight: -1}
-        //    for(var i = 0; i < arrayOfPets.length; i++){
-        //        var currentPet = arrayOfPets[i];
-        //        if (currentPet.weight > heaviest.weight) {
-        //            heaviest = currentPet;
-        //        }
-        //    }
-        //    return heaviest;
-        //};
-        //
+        $scope.removeData = function(index){
+            $http.delete('/api/GPA/' + $scope.GPAdata[index]._id).success(function(){
+                $scope.updateDatabase();
+            });
+        };
+
+        $scope.cat = function(str1, str2){
+            return str1 + str2;
+        };
+
+        $scope.itemsInList = function(){
+            return $scope.data.length;
+        };
+
+        $scope.findHeaviestPet = function(arrayOfPets){
+            //Handle case of empty array
+            var heaviest = {text: "No Pets Found", weight: -1}
+            for(var i = 0; i < arrayOfPets.length; i++){
+                var currentPet = arrayOfPets[i];
+                if (currentPet.weight > heaviest.weight) {
+                    heaviest = currentPet;
+                }
+            }
+            return heaviest;
+        };
+
         $scope.isPositive = function(number){
             return number > 0;
         }
