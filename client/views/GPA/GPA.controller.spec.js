@@ -49,4 +49,29 @@ describe('Testing controller: GPACtrl', function(){
 
     });
 
+    it('letterToNum should return 4.0 for A', function(){
+        expect(scope.letterToNum("A")).toEqual(4.0);
+        expect(scope.letterToNum("a")).toEqual(4.0);
+    });
+
+    it('letterToNum should return 3.0 for B', function(){
+        expect(scope.letterToNum("B")).toEqual(3.0);
+        expect(scope.letterToNum("b")).toEqual(3.0);
+    });
+
+    it('letterToNum should return 2.0 for C', function(){
+        expect(scope.letterToNum("C")).toEqual(2.0);
+        expect(scope.letterToNum("c")).toEqual(2.0);
+    });
+
+    it('letterToNum should return 1.0 for D', function(){
+        expect(scope.letterToNum("D")).toEqual(1.0);
+        expect(scope.letterToNum("d")).toEqual(1.0);
+    });
+
+    it('letterToNum should return 0.0 for F or any other letter', function(){
+        expect(scope.letterToNum("F")).toEqual(0.0);
+        expect(scope.letterToNum("Z")).toEqual(0.0);
+    });
+
 });
