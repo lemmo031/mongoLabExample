@@ -120,4 +120,12 @@ angular.module("appModule")
                     return 0.0;
             }
         }
+
+        $scope.calculateGPA = function(pointsEarned, totalCredits){
+            if (totalCredits == 0){
+                return 0;
+            }
+
+            return pointsEarned/totalCredits;
+        }
     });

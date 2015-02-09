@@ -75,21 +75,21 @@ describe('Testing controller: GPACtrl', function(){
     });
 
     it('these results should yield 4.0', function(){
-        expect(calculateGPA(16, 4)).toBeCloseTo(4.0, 2); // This makes sure we have 2 decimal points of precision.
-        expect(calculateGPA(12, 3)).toBeCloseTo(4.0, 2);
-        expect(calculateGPA(20, 5)).toBeCloseTo(4.0, 2);
+        expect(scope.calculateGPA(16, 4)).toBeCloseTo(4.0, 2); // This makes sure we have 2 decimal points of precision.
+        expect(scope.calculateGPA(12, 3)).toBeCloseTo(4.0, 2);
+        expect(scope.calculateGPA(20, 5)).toBeCloseTo(4.0, 2);
     })
 
     it('these results should yield 3.2', function(){
-        expect(calculateGPA(16, 5)).toBeCloseTo(3.2, 2);
+        expect(scope.calculateGPA(16, 5)).toBeCloseTo(3.2, 2);
     })
 
     it('these results should yield 2.3', function(){
-        expect(calculateGPA(6.9, 3)).toBeCloseTo(2.3, 2);
+        expect(scope.calculateGPA(6.9, 3)).toBeCloseTo(2.3, 2);
     })
 
     it('these results should yield 3.13', function(){
-        expect(calculateGPA(279, 89)).toBeCloseTo(3.13, 2);
+        expect(scope.calculateGPA(279, 89)).toBeCloseTo(3.13, 2);
     })
 
 });
