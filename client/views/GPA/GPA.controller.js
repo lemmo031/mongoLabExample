@@ -18,7 +18,7 @@ angular.module("appModule")
         //// Normally, data like this would be stored in a database, and this controller would issue an http:get request for it.
         $scope.GPAdata = [];
 
-        $scope.updateGPAdata = function (){
+        $scope.updateGPA = function (){
             $http.get('api/GPA/').success(function(database) {
                 $scope.GPAdata = database;
                 $scope.output = $scope.calculateGPA($scope.GPAdata);
@@ -26,10 +26,9 @@ angular.module("appModule")
 
         };
 
-        $scope.updateGPAdata();
+        $scope.updateGPA();
 
         $scope.addClass = function(){
-            console.log("Hi from addClass")
             if(!$scope.isNotEmpty($scope.classField)) {
                 alert("You Should Enter A Class Name!");
                 return;
@@ -44,8 +43,7 @@ angular.module("appModule")
             }
             $scope.gradeField = $scope.gradeField.toUpperCase(); // This converts grade field to an upper-case letter for consistency
             $http.post('api/GPA/', {class: $scope.classField, credits: $scope.creditsField, grade: $scope.gradeField}).success(function(){
-                $scope.updateGPAdata();
-                $scope.updateGPA($scope.creditsField * $scope.letterToNum($scope.gradeField), $scope.creditsField);
+                $scope.updateGPA();
             });
 
             $scope.classField = "";
@@ -56,28 +54,8 @@ angular.module("appModule")
 
         $scope.removeData = function(index){
             $http.delete('/api/GPA/' + $scope.GPAdata[index]._id).success(function(){
-                $scope.updateGPAdata();
+                $scope.updateGPA();
             });
-        };
-
-        $scope.cat = function(str1, str2){
-            return str1 + str2;
-        };
-
-        $scope.itemsInList = function(){
-            return $scope.data.length;
-        };
-
-        $scope.findHeaviestPet = function(arrayOfPets){
-            //Handle case of empty array
-            var heaviest = {text: "No Pets Found", weight: -1}
-            for(var i = 0; i < arrayOfPets.length; i++){
-                var currentPet = arrayOfPets[i];
-                if (currentPet.weight > heaviest.weight) {
-                    heaviest = currentPet;
-                }
-            }
-            return heaviest;
         };
 
         $scope.isPositive = function(number){
@@ -124,18 +102,17 @@ angular.module("appModule")
         }
 
         $scope.calculateGPA = function(array){
-            if (totalCredits == 0){
+            if (array.length == 0) {
                 return 0;
             }
-
-            return -1;
+            var pointsEarned = 0;
+            var totalCredits = 0;
+            for (var index = 0; index < array.length; index++) {
+                var course = array[index];
+                pointsEarned += course.credits * $scope.letterToNum(course.grade);
+                totalCredits += course.credits;
+            }
+            return pointsEarned/totalCredits;
         }
 
-        $scope.updateGPA = function(changeInPoints, changeInCredits){
-            $scope.pointsEarned += changeInPoints;
-            $scope.totalCredits += changeInCredits;
-            console.log("almost to calcGPA");
-            $scope.output = $scope.calculateGPA($scope.pointsEarned, $scope.totalCredits);
-            console.log($scope.output);
-        };
     });

@@ -81,17 +81,17 @@ describe('Testing controller: GPACtrl', function(){
         expect(scope.calculateGPA(theArray)).toBeCloseTo(4.0, 2); // This makes sure we have 2 decimal points of precision.
     })
 
-    it('these results should yield 3.2', function(){
+    it('these results should yield 2.56', function(){
         var theArray = [{class: "TheThirdClass", credits: 4, grade: "A"}, {class: "TheFourthBestClass", credits: 4, grade: "a"}, {class: "TheWorstClass", credits: 5, grade: "F"}, {class: "TheSecondBestClass", credits: 3, grade: "b"}];
         expect(scope.calculateGPA(theArray)).toBeCloseTo(2.56, 2);
     })
 
-    it('these results should yield 2.3', function(){
+    it('these results should yield 2.9', function(){
         var theArray = [{class: "TheClass", credits: 1, grade: "d"}, {class: "TheFourthClass", credits: 4, grade: "C"}, {class: "TheWorst", credits: 5, grade: "A"}];
         expect(scope.calculateGPA(theArray)).toBeCloseTo(2.9, 2);
     })
 
-    it('these results should yield 3.13', function(){
+    it('these results should yield 0', function(){
         var theArray = [];
         expect(scope.calculateGPA(theArray)).toBeCloseTo(0, 5);
     })
