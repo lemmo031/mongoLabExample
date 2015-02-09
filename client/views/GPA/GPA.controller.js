@@ -8,23 +8,25 @@ angular.module("appModule")
     .controller('GPACtrl', function($scope, $http){
         console.log("GPA controller loaded!");
 
-        $scope.classField = "a";
-        $scope.creditsField = 3;
-        $scope.gradeField = "A";
-        $scope.heaviestPet = {text: "No Pet Found", weight: -1} //findHeaviestPet([]); // Initializes this field to have a default message.
+        $scope.classField = "";
+        $scope.creditsField = "";
+        $scope.gradeField = "";
+        $scope.pointsEarned = 0;
+        $scope.totalCredits = 0;
+        $scope.output = 0;
 
         //// Normally, data like this would be stored in a database, and this controller would issue an http:get request for it.
         $scope.GPAdata = [];
 
-        $scope.updateDatabase = function(){
+        $scope.updateGPAdata = function (){
             $http.get('api/GPA/').success(function(database) {
                 $scope.GPAdata = database;
-               // $scope.heaviestPet = $scope.findHeaviestPet($scope.data);
+                $scope.output = $scope.calculateGPA($scope.GPAdata);
             });
 
         };
 
-        $scope.updateDatabase();
+        $scope.updateGPAdata();
 
         $scope.addClass = function(){
             console.log("Hi from addClass")
@@ -40,10 +42,10 @@ angular.module("appModule")
                 alert("Must Enter A Valid Class Grade");
                 return;
             }
-            console.log("Almost To POST")
+            $scope.gradeField = $scope.gradeField.toUpperCase(); // This converts grade field to an upper-case letter for consistency
             $http.post('api/GPA/', {class: $scope.classField, credits: $scope.creditsField, grade: $scope.gradeField}).success(function(){
-                $scope.updateDatabase();
-                console.log("Ha, you can't see me!~")
+                $scope.updateGPAdata();
+                $scope.updateGPA($scope.creditsField * $scope.letterToNum($scope.gradeField), $scope.creditsField);
             });
 
             $scope.classField = "";
@@ -54,7 +56,7 @@ angular.module("appModule")
 
         $scope.removeData = function(index){
             $http.delete('/api/GPA/' + $scope.GPAdata[index]._id).success(function(){
-                $scope.updateDatabase();
+                $scope.updateGPAdata();
             });
         };
 
@@ -121,11 +123,19 @@ angular.module("appModule")
             }
         }
 
-        $scope.calculateGPA = function(pointsEarned, totalCredits){
+        $scope.calculateGPA = function(array){
             if (totalCredits == 0){
                 return 0;
             }
 
-            return pointsEarned/totalCredits;
+            return -1;
         }
+
+        $scope.updateGPA = function(changeInPoints, changeInCredits){
+            $scope.pointsEarned += changeInPoints;
+            $scope.totalCredits += changeInCredits;
+            console.log("almost to calcGPA");
+            $scope.output = $scope.calculateGPA($scope.pointsEarned, $scope.totalCredits);
+            console.log($scope.output);
+        };
     });
